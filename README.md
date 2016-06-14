@@ -11,7 +11,8 @@ are reflected in the image tags on the Docker Index (e.g. branch `1.11.2`
 corresponds to the image `geodata/gdal:1.11.2`).
 
 In contrast to the Ubuntu based `geodata/gdal` image, there
-is no support for `libgta` and `MDB` (no Java).
+is no support for `libgta` and `MDB` (no Java) and support for
+MongoDB has been dropped after installation on Debian fails currently.
 
 ## Usage
 

@@ -12,7 +12,9 @@ FROM debian:jessie
 MAINTAINER Geometalab <geometalab@hsr.ch>
 
 # Install the application.
-ADD . /usr/local/src/gdal-docker/
+COPY gdal-checkout.txt /usr/local/src/gdal-docker/
+COPY Makefile /usr/local/src/gdal-docker/
+
 RUN apt-get update -y && \
     apt-get install -y make && \
     make -C /usr/local/src/gdal-docker install clean && \

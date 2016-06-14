@@ -62,7 +62,10 @@ NPROC := $(shell nproc)
 
 install: $(GDAL_CONFIG)
 
-$(GDAL_CONFIG): /tmp/gdal $(MONGO_DEV) $(OPENJPEG_DEV) $(FILEGDBAPI_DEV) $(LIBECWJ2_DEV) $(MRSID_DEV) $(LIBKML_DEV) $(LIBKEA_DEV) $(MDBSQLITE_DEV) $(DEPS_DEV) $(ANT)
+# to include mongodb support:
+# $(GDAL_CONFIG): /tmp/gdal $(MONGO_DEV) $(OPENJPEG_DEV) $(FILEGDBAPI_DEV) $(LIBECWJ2_DEV) $(MRSID_DEV) $(LIBKML_DEV) $(LIBKEA_DEV) $(MDBSQLITE_DEV) $(DEPS_DEV) $(ANT)
+# additionattly, change the last line in ./configure, `$(USE_GRASS)` to `--with-mongocxx=/usr/local $(USE_GRASS)`
+$(GDAL_CONFIG): /tmp/gdal $(OPENJPEG_DEV) $(FILEGDBAPI_DEV) $(LIBECWJ2_DEV) $(MRSID_DEV) $(LIBKML_DEV) $(LIBKEA_DEV) $(MDBSQLITE_DEV) $(DEPS_DEV) $(ANT)
 	cd /tmp/gdal/gdal \
 	&& ./configure \
 		--prefix=/usr/local \
@@ -82,7 +85,7 @@ $(GDAL_CONFIG): /tmp/gdal $(MONGO_DEV) $(OPENJPEG_DEV) $(FILEGDBAPI_DEV) $(LIBEC
 		--with-fgdb=/usr/local \
 		--with-libkml \
 		--with-openjpeg=/usr/local \
-		--with-mongocxx=/usr/local $(USE_GRASS) \
+		$(USE_GRASS) \
 	&& make -j$(NPROC) \
 	&& cd ./swig/perl \
 	&& make generate \
