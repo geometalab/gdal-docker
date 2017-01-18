@@ -7,7 +7,7 @@
 # <https://github.com/OSGeo/gdal/blob/trunk/.travis.yml>
 #
 
-FROM debian:jessie
+FROM python:3.4-slim
 
 MAINTAINER Geometalab <geometalab@hsr.ch>
 
