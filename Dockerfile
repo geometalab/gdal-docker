@@ -7,7 +7,7 @@
 # <https://github.com/OSGeo/gdal/blob/trunk/.travis.yml>
 #
 
-FROM python:3.4-slim
+FROM python:3.6-slim
 
 MAINTAINER Geometalab <geometalab@hsr.ch>
 
@@ -18,7 +18,8 @@ COPY Makefile /usr/local/src/gdal-docker/
 RUN apt-get update -y && \
     apt-get install -y make && \
     make -C /usr/local/src/gdal-docker install clean && \
-    apt-get purge -y make
+    apt-get purge -y make && \
+    rm -rf /var/lib/apt/lists/*
 
 # Externally accessible data is by default put in /data
 WORKDIR /data
