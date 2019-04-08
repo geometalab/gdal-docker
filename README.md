@@ -17,7 +17,7 @@ You can find the image [geometalab/gdal-docker][dockerimage] on dockerhub.
 Running the container without any arguments will by default output the GDAL
 version string as well as the supported raster and vector formats:
 ```
-docker run --rm -ti geometalab/gdal-docker
+docker run --rm -ti geometalab/gdal-docker:2.4.0-conda
 ```
 will output something like:
 ```
@@ -33,7 +33,7 @@ Supported Formats:
 The following command will open a bash shell in an Ubuntu based environment
 with GDAL available:
 
-    docker run --rm -ti geometalab/gdal-docker /bin/bash
+    docker run --rm -ti geometalab/gdal-docker:2.4.0-conda /bin/bash
 
 You will most likely want to work with `data` on the host system from within the
 docker container, in which case run the container with the `--volume` option. Assuming
@@ -41,18 +41,14 @@ you have a raster called `test.tif` in your current working directory on your
 host system, running the following command should invoke `gdalinfo` on
 `test.tif`:
 
-    docker run --rm -ti --volume $(pwd):/data geometalab/gdal-docker gdalinfo test.tif
+    docker run --rm -ti --volume $(pwd):/data geometalab/gdal-docker:2.4.0-conda gdalinfo test.tif
 
 This works because the current working directory is set to `/data` in the
 container, and you have mapped the current working directory on your host to
 `/data`.
 
-GDAL will be run under user `nobody` in the container, so if editing or creating
-files the appropriate permissions for that user must be applied to the directory
-pointed to by `$(pwd)`.  Alternatively pass the `--user` option to `docker run`.
-
 Note that the image tagged `latest`, GDAL represents the latest code *at the
 time the image was built*. If you want to include the most up-to-date commits
 then you need to build the docker image yourself locally along these lines:
 
-    docker build -t geometalab/gdal-docker:local git://github.com/geometalab/gdal-docker.git
+    docker build -t geometalab/gdal-docker:2.4.0-conda:local git://github.com/geometalab/gdal-docker.git
